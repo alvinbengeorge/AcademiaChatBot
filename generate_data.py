@@ -51,6 +51,12 @@ def scrape_academia_html_data(email, password, headless=False):
     Returns:
         dict: Dictionary containing collected text data from all pages
     """
+    # Delete folders if they exist
+    folders_to_delete = ["chroma_structured", "sources", "structured_data"]
+    for folder in folders_to_delete:
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+            print(f"Deleted existing {folder} folder")
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
     if headless:
